@@ -14,7 +14,9 @@ const schema = new Schema({
         createdAt: Date,
         updatedAt: Date
     },
-    {timestamps: new Date()} // todo: разобраться со временем
+    {
+        timestamps:{ currentTime: () => new Date(Date.now()+3*60*60*1000)}
+    }
 );
 
 module.exports = mongoose.model('Author', schema)

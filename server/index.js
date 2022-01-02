@@ -3,7 +3,8 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
 const postsRoutes = require('./routes/posts')
-const categoryRoutes = require('./routes/categories')
+const categoriesRoutes = require('./routes/categories')
+const authorsRoutes = require('./routes/authors')
 
 const app = express()
 
@@ -11,7 +12,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 app.use(postsRoutes)
-app.use(categoryRoutes)
+app.use(categoriesRoutes)
+app.use(authorsRoutes)
 
 app.get('/', (req, res) => {
     res.send('Homepage')
