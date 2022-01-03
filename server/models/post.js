@@ -14,17 +14,17 @@ const schema = new Schema({
         excerpt: String,
         categories: {
             type: [mongoose.Types.ObjectId],
-            ref: 'Category',
+            ref: 'categories',
             required: true,
         },
         authors: {
             type: [mongoose.Types.ObjectId],
-            ref: 'author',
+            ref: 'authors',
             required: true,
         },
         tags: {
             type: [mongoose.Types.ObjectId],
-            ref: 'tag',
+            ref: 'tags',
             required: true,
         },
         createdAt: Date,

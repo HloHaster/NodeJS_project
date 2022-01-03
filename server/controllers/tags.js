@@ -7,7 +7,7 @@ module.exports = {
     },
 
     findOne: function (req, res) {
-        genericController.FindOneDocumentAndResponse(req, res, TagModel)
+        genericController.findOneDocumentAndResponse(req, res, TagModel)
     },
 
     create: function (req, res) {

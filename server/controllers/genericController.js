@@ -1,7 +1,6 @@
 let findAllDocumentsAndResponse = (req, res, documentModel) => {
     documentModel
         .find()
-        // .populate('categories')
         .then((documents) => {
             res.json(documents)
             res.end
@@ -11,7 +10,7 @@ let findAllDocumentsAndResponse = (req, res, documentModel) => {
         })
 }
 
-let FindOneDocumentAndResponse = (req, res, documentModel) => {
+let findOneDocumentAndResponse = (req, res, documentModel) => {
     const {id} = req.params;
     documentModel
         .findOne({"_id": id})
@@ -19,7 +18,8 @@ let FindOneDocumentAndResponse = (req, res, documentModel) => {
             res.json(document)
             res.end
         })
-        .catch(() => {
+        .catch((e) => {
+            console.log(e)
             res.status(404).json({error: 'There is no entity with such id'})
         })
 }
@@ -79,7 +79,7 @@ let deleteDocumentAndSendResponse = (req, res, documentModel) => {
 
 
 module.exports.findAllDocumentsAndResponse = findAllDocumentsAndResponse;
-module.exports.FindOneDocumentAndResponse = FindOneDocumentAndResponse;
+module.exports.findOneDocumentAndResponse = findOneDocumentAndResponse;
 module.exports.saveDocumentAndSendResponse = saveDocumentAndSendResponse;
 module.exports.updateDocumentAndSendResponse = updateDocumentAndSendResponse;
 module.exports.deleteDocumentAndSendResponse = deleteDocumentAndSendResponse;
