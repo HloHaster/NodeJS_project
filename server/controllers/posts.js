@@ -2,8 +2,15 @@ const PostModel = require('../models/post');
 const genericController = require('./genericController')
 
 module.exports = {
-    find: function (req, res) {
-        genericController.findAllDocumentsAndResponse(req, res, PostModel)
+    find: async function (req, res) {
+        try {
+            let posts = await genericController.findAllDocumentsAndResponse(req, res, PostModel)
+            const havePosts = !!posts.length;
+            res.render('index', {havePosts, posts, title: "Home"})
+        } catch (e) {
+            res.status(500)
+            res.render('error.hbs', {title: 'error 500', message: "Unexpected error occurred on the server"})
+        }
     },
 
     findOne: function (req, res) {

@@ -1,13 +1,5 @@
-let findAllDocumentsAndResponse = (req, res, documentModel) => {
-    documentModel
-        .find()
-        .then((documents) => {
-            res.json(documents)
-            res.end
-        })
-        .catch((error) => {
-            res.status(400).json({error: error.message})
-        })
+let findAllDocumentsAndResponse = async (req, res, documentModel) => {
+    return await documentModel.find()
 }
 
 let findOneDocumentAndResponse = (req, res, documentModel) => {
