@@ -12,16 +12,21 @@ const schema = new Schema({
             required: true
         },
         excerpt: String,
-        // categories: {
-        //     type: [mongoose.Types.ObjectId], // SchemaType doesn't actually create MongoDB ObjectIds, it is just a configuration for a path in a schema.
-        //     ref: 'Category',
-        //     required: true,
-        // },
-        // author: {
-        //     type: [mongoose.Types.ObjectId],
-        //     ref: 'author',
-        //     required: true,
-        // },
+        categories: {
+            type: [mongoose.Types.ObjectId],
+            ref: 'Category',
+            required: true,
+        },
+        authors: {
+            type: [mongoose.Types.ObjectId],
+            ref: 'author',
+            required: true,
+        },
+        tags: {
+            type: [mongoose.Types.ObjectId],
+            ref: 'tag',
+            required: true,
+        },
         createdAt: Date,
         updatedAt: Date
     },
