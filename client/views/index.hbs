@@ -1,0 +1,13 @@
+<h1>POSTS</h1>
+
+{{#if havePosts}}
+    <ul>
+    {{#each posts}}
+        <li><a href="/">Name: {{name}}</a></li>
+        <li>Body: {{body}}</li>
+        <li>Excerpt: {{excerpt}}</li>
+    {{/each}}
+    </ul>
+{{else}}
+    <div>Nothing Found</div>
+{{/if}}

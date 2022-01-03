@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
+const mongodb = require('mongodb')
 
 const postsRoutes = require('./routes/posts')
 const categoriesRoutes = require('./routes/categories')
