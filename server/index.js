@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const postsRoutes = require('./routes/posts')
 const categoriesRoutes = require('./routes/categories')
 const authorsRoutes = require('./routes/authors')
+const tagsRoutes = require('./routes/tags')
 
 const app = express()
 
@@ -14,6 +15,7 @@ app.use(bodyParser.json())
 app.use(postsRoutes)
 app.use(categoriesRoutes)
 app.use(authorsRoutes)
+app.use(tagsRoutes)
 
 app.get('/', (req, res) => {
     res.send('Homepage')
