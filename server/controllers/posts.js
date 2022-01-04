@@ -33,7 +33,9 @@ module.exports = {
             if (isStrEmpty(name) || isStrEmpty(body)) {
                 res.status(400)
                 res.render('error.hbs', {title: 'error 400', message: "The post's name and body must not be empty"})
+                return;
             }
+            console.log(10)
             await genericController.saveDocument(req, res, PostModel)
             res.redirect('/')
         } catch (e) {
