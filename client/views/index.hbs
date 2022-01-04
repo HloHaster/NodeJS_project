@@ -3,7 +3,7 @@
 {{#if havePosts}}
     <ul>
     {{#each posts}}
-        <li><a href="/">Name: {{name}}</a></li>
+        <li><a href="/posts/{{_id}}">Name: {{name}}</a></li>
         <li>Body: {{body}}</li>
         <li>Excerpt: {{excerpt}}</li>
     {{/each}}

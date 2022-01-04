@@ -1,78 +1,36 @@
-let findAllDocumentsAndResponse = async (req, res, documentModel) => {
+let findAllDocuments = async (req, res, documentModel) => {
     return await documentModel.find()
 }
 
-let findOneDocumentAndResponse = (req, res, documentModel) => {
-    const {id} = req.params;
-    documentModel
-        .findOne({"_id": id})
-        .then((document) => {
-            res.json(document)
-            res.end
-        })
-        .catch((e) => {
-            console.log(e)
-            res.status(404).json({error: 'There is no entity with such id'})
-        })
+let findOneDocumentById = async (req, res, documentModel, id) => {
+    return await documentModel.findOne({"_id": id})
 }
 
-let saveDocumentAndSendResponse = (req, res, documentModel) => {
+let saveDocument = async (req, res, documentModel) => {
     const doc = req.body
 
     delete doc.createdAt
     delete doc.updatedAt
     let document = new documentModel(doc)
 
-    document
-        .save()
-        .then((savedDocument) => {
-            res.json(savedDocument);
-            res.end();
-        })
-        .catch((error) => {
-            res.status(400).json({error: error.message})
-        })
+    return await document.save()
 }
 
-let updateDocumentAndSendResponse = (req, res, documentModel) => {
-    const document = req.body
-
-    if (!document._id) {
-        res.status(404).json({error: 'There is no entity with such id'})
-    }
-
+let updateDocument = async (req, res, documentModel, document, id) => {
     delete document.createdAt
     delete document.updatedAt
 
-    documentModel.findByIdAndUpdate(document._id, document, {new: true})
-        .then((updatedDocument) => {
-            res.json(updatedDocument)
-            res.end
-        })
-        .catch((error) => {
-            res.status(400).json({error: error.message})
-        })
+    return await documentModel.findByIdAndUpdate(id, document, {new: true})
 }
 
-let deleteDocumentAndSendResponse = (req, res, documentModel) => {
-    const {id} = req.params
-    if (!id) {
-        res.status(404).json({error: 'There is no entity with such id'})
-    }
-    documentModel.findByIdAndDelete(id)
-        .then((deletedDocument) => {
-            res.json(deletedDocument)
-            res.end
-        })
-        .catch((error) => {
-            res.status(400).json({error: error.message})
-        })
+let deleteDocument = (req, res, documentModel, id) => {
+    return documentModel.findByIdAndDelete(id);
 }
 
 
-module.exports.findAllDocumentsAndResponse = findAllDocumentsAndResponse;
-module.exports.findOneDocumentAndResponse = findOneDocumentAndResponse;
-module.exports.saveDocumentAndSendResponse = saveDocumentAndSendResponse;
-module.exports.updateDocumentAndSendResponse = updateDocumentAndSendResponse;
-module.exports.deleteDocumentAndSendResponse = deleteDocumentAndSendResponse;
+module.exports.findAllDocuments = findAllDocuments;
+module.exports.findOneDocumentById = findOneDocumentById;
+module.exports.saveDocument = saveDocument;
+module.exports.updateDocument = updateDocument;
+module.exports.deleteDocument = deleteDocument;
 

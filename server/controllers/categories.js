@@ -3,11 +3,11 @@ const genericController = require('./genericController')
 
 module.exports = {
     find: function (req, res) {
-        genericController.findAllDocumentsAndResponse(req, res, CategoryModel)
+        genericController.findAllDocuments(req, res, CategoryModel)
     },
 
     findOne: function (req, res) {
-        genericController.findOneDocumentAndResponse(req, res, CategoryModel)
+        genericController.findOneDocumentById(req, res, CategoryModel)
     },
 
     create: function (req, res) {
@@ -18,15 +18,15 @@ module.exports = {
             })
         }
 
-        genericController.saveDocumentAndSendResponse(req, res, CategoryModel)
+        genericController.saveDocument(req, res, CategoryModel)
     },
 
     update: function (req, res) {
-        genericController.updateDocumentAndSendResponse(req, res, CategoryModel)
+        genericController.updateDocument(req, res, CategoryModel)
     },
 
     remove: function (req, res) {
-        genericController.deleteDocumentAndSendResponse(req, res, CategoryModel)
+        genericController.deleteDocument(req, res, CategoryModel)
     }
 }
 
