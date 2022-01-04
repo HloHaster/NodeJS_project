@@ -1,9 +1,9 @@
 let findAllDocuments = async (req, res, documentModel) => {
-    return await documentModel.find()
+    return await documentModel.find().lean()
 }
 
 let findOneDocumentById = async (req, res, documentModel, id) => {
-    return await documentModel.findOne({"_id": id})
+    return await documentModel.findOne({"_id": id}).lean()
 }
 
 let saveDocument = async (req, res, documentModel) => {

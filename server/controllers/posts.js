@@ -18,7 +18,9 @@ module.exports = {
             const {id} = req.params;
             let post = await genericController.findOneDocumentById(req, res, PostModel, id)
             const havePost = !!post;
-            res.render('post', {title: 'post ${id}', post, havePost}) // todo: post id in title
+            console.log(post.name)
+            console.log(post)
+            res.render('postPage', {title: 'post ${id}', post, havePost}) // todo: post id in title
         } catch (e) {
             res.status(404)
             res.render('error.hbs', {title: 'error 404', message: "There is no entity with such id"})
