@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const fileLogger = require('./utils/fileLogger')
 
 const postsRoutes = require('./routes/posts')
 const categoriesRoutes = require('./routes/categories')
@@ -9,8 +10,23 @@ const tagsRoutes = require('./routes/tags')
 
 const app = express()
 
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
+
+const logger = (req, res, next) => {
+    const loggerData = {
+        rout: req.url,
+        typeOfReq: req.method,
+        params: req.params,
+        body: req.body,
+        datetime: new Date(Date.now() + 3 * 60 * 60 * 1000),
+    }
+
+    fileLogger.log(loggerData)
+    next();
+}
+
+app.use(logger)
 
 app.use(postsRoutes)
 app.use(categoriesRoutes)

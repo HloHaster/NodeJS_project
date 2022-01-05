@@ -30,7 +30,7 @@ module.exports = {
         }
     },
 
-    findOne: function (req, res) {
+    findOne: async function (req, res) {
         try {
             const {id} = req.params;
             const options = {
