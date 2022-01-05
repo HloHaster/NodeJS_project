@@ -1,11 +1,15 @@
 <h1>POST</h1>
 
 {{#if havePost}}
-    <img src="{{post.thumbnail}}" alt="thumbnail">
-    <p>{{post}}</p>
+    <div class="card">
+    {{#if post.thumbnail}}
+        <img style="width: 40%; height: 300px; object-fit: contain; margin-bottom: 10px" src="{{post.thumbnail}}"
+             alt="thumbnail">
+    {{/if}}
     <p>Name: {{post.name}}</a></p>
     <p>Body: {{post.body}}</p>
     <p>Excerpt: {{post.excerpt}}</p>
+    </div>
 {{else}}
     <div>Nothing Found</div>
 {{/if}}
