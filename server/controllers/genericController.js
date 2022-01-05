@@ -1,19 +1,30 @@
-let findAllDocuments = async (req, res, documentModel) => {
-    return await documentModel.find().lean()
+let findAllDocuments = (req, res, documentModel) => {
+    documentModel
+        .find()
+        .then(documents => {
+            res.json(documents)
+        })
 }
 
-let findOneDocumentById = async (req, res, documentModel, id) => {
-    return await documentModel.findOne({"_id": id}).lean()
+let findOneDocumentById = (req, res, documentModel, id) => {
+    documentModel
+        .findOne({"_id": id})
+        .then(document => {
+            res.json(document)
+        })
 }
 
-let saveDocument = async (req, res, documentModel) => {
+let saveDocument = (req, res, documentModel) => {
     const doc = req.body
 
     delete doc.createdAt
     delete doc.updatedAt
     let document = new documentModel(doc)
 
-    return await document.save()
+    document.save()
+        .then ( document => {
+            res.json(document)
+        })
 }
 
 let updateDocument = async (req, res, documentModel, document, id) => {

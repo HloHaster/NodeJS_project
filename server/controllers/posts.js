@@ -2,32 +2,30 @@ const PostModel = require('../models/post');
 const genericController = require('./genericController')
 
 module.exports = {
-    find: async function (req, res) {
+    find: function (req, res) {
         try {
-            let posts = await genericController.findAllDocuments(req, res, PostModel)
-            const havePosts = !!posts.length;
-            res.render('index', {havePosts, posts, title: "Home"})
+            genericController.findAllDocuments(req, res, PostModel)
         } catch (e) {
             res.status(500)
             res.render('error.hbs', {title: 'error 500', message: "Unexpected error occurred on the server"})
         }
     },
 
-    findOne: async function (req, res) {
+    findOne: function (req, res) {
         try {
             const {id} = req.params;
-            let post = await genericController.findOneDocumentById(req, res, PostModel, id)
-            const havePost = !!post;
-            console.log(post.name)
-            console.log(post)
-            res.render('postPage', {title: 'post ${id}', post, havePost}) // todo: post id in title
+            genericController.findOneDocumentById(req, res, PostModel, id)
         } catch (e) {
-            res.status(404)
-            res.render('error.hbs', {title: 'error 404', message: "There is no entity with such id"})
+            res.status(500)
+            res.render('error.hbs', {title: 'error 500', message: "Unexpected error occurred on the server"})
         }
+        // catch (e) {
+        //     res.status(404)
+        //     res.render('error.hbs', {title: 'error 404', message: "There is no entity with such id"})
+        // }
     },
 
-    create: async function (req, res) {
+    create: function (req, res) {
         try {
             const {name, body} = req.body;
             if (isStrEmpty(name) || isStrEmpty(body)) {
@@ -35,9 +33,7 @@ module.exports = {
                 res.render('error.hbs', {title: 'error 400', message: "The post's name and body must not be empty"})
                 return;
             }
-            console.log(10)
-            await genericController.saveDocument(req, res, PostModel)
-            res.redirect('/')
+            genericController.saveDocument(req, res, PostModel)
         } catch (e) {
             res.status(500)
             res.render('error.hbs', {title: 'error 500', message: "Unexpected error occurred on the server"})
