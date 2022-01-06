@@ -18,7 +18,7 @@ module.exports = {
                     }
                     let tags = JSON.parse(d)
                     const haveTags = !!tags.length;
-                    res.render('index', {haveTags, tags, title: "Tags"})
+                    res.render('tags', {haveTags, tags, title: "Tags"})
                 })
             })
 
@@ -36,7 +36,7 @@ module.exports = {
                 hostname: 'localhost',
                 port: 3000,
                 path: `/tags/${id}`,
-                method: 'GET'
+                method: 'GET',
             }
             const serverRequest = http.request(options, serverResponse => {
                 serverResponse.on('data', d => {
@@ -47,7 +47,7 @@ module.exports = {
                     }
                     let tag = JSON.parse(d)
                     const haveTag = !!tag;
-                    res.render('postPage', {haveTag, tag, title: `Tag ${id}`})
+                    res.render('tagPage', {haveTag, tag, title: `Tag ${id}`})
                 })
             })
             serverRequest.end();
