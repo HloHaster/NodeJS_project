@@ -24,6 +24,8 @@ app.set('views', 'views')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
+app.use(express.static('public'));
+
 app.use(postsRoutes)
 app.use(categoriesRoutes)
 app.use(authorsRoutes)

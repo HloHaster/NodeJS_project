@@ -1,14 +1,23 @@
 <h1>POST</h1>
 
 {{#if havePost}}
-    <div class="card">
-    {{#if post.thumbnail}}
-        <img style="width: 40%; height: 300px; object-fit: contain; margin-bottom: 10px" src="{{post.thumbnail}}"
-             alt="thumbnail">
-    {{/if}}
-    <p>Name: {{post.name}}</a></p>
-    <p>Body: {{post.body}}</p>
-    <p>Excerpt: {{post.excerpt}}</p>
+    <div class="card" style="padding-top: 10px">
+        {{#if post.thumbnail}}
+            <img style="width: 40%; height: 300px; object-fit: contain; margin-bottom: 10px" src="{{post.thumbnail}}"
+                 alt="thumbnail">
+        {{/if}}
+        <div style="padding-left: 35px">
+        <p style="font-weight: bold;">{{post.name}}</a></p>
+        <p>Body: {{post.body}}</p>
+        {{#if post.excerpt}}
+            <p>Excerpt: {{post.excerpt}}</p>
+        {{/if}}
+        <p>Categories: {{#each post.categories}} {{this}} {{/each}} </p>
+        <p>Authors: {{#each post.authors}} {{this}} {{/each}}</p>
+        <p>Tags: {{#each post.tags}} {{this}} {{/each}}</p>
+        <p>Created: {{post.createdAt}}</p>
+        <p>Updated: {{post.updatedAt}}</p>
+        </div>
     </div>
 {{else}}
     <div>Nothing Found</div>
