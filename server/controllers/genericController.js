@@ -4,6 +4,7 @@ let findAllDocuments = (req, res, documentModel) => {
     documentModel
         .find()
         .then(documents => {
+            console.log(documents)
             res.json(documents)
         })
         .catch(e => {

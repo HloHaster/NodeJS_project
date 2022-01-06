@@ -4,8 +4,10 @@ function log(data) {
     let fileContent = "";
     try {
         fileContent = fs.readFileSync("logs/logs.json", "utf8");
-    } catch (ignored) {
-        // ignore it
+    } catch (e) {
+        fs.mkdir('logs', err => {
+            if(err) throw err;
+        });
     }
 
     let array;
