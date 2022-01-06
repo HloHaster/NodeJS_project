@@ -8,11 +8,12 @@ let findAllDocuments = (req, res, documentModel) => {
         })
         .catch(e => {
             res.status(500)
-            res.json({errorMessage: "Internal Server Error"})
+            res.json({errorMessage: "Unexpected error occurred on the server"})
         })
 }
 
-let findOneDocumentById = (req, res, documentModel, id) => {
+let findOneDocumentById = (req, res, documentModel) => {
+    const {id} = req.params;
     if (mongoose.Types.ObjectId.isValid(id)) {
         documentModel
             .findOne({"_id": id})
@@ -21,7 +22,7 @@ let findOneDocumentById = (req, res, documentModel, id) => {
             })
             .catch(e => {
                 res.status(404)
-                res.json({ errorMessage: "There is no entity with such id"})
+                res.json({errorMessage: "There is no entity with such id"})
             })
     } else {
         res.status(400)
@@ -39,20 +40,52 @@ let saveDocument = (req, res, documentModel) => {
     document.save()
         .then(document => {
             res.json(document)
-        }).catch(e => {
-
-    })
+        })
+        .catch(e => {
+            res.status(500)
+            res.json({errorMessage: "Unexpected error occurred on the server"})
+        })
 }
 
-let updateDocument = async (req, res, documentModel, document, id) => {
+let updateDocument = (req, res, documentModel) => {
+    const document = req.body
+    const {id} = req.params;
+
     delete document.createdAt
     delete document.updatedAt
 
-    return await documentModel.findByIdAndUpdate(id, document, {new: true})
+    if (mongoose.Types.ObjectId.isValid(id)) {
+        documentModel
+            .findByIdAndUpdate(id, document, {new: true})
+            .then(document => {
+                res.json(document)
+            })
+            .catch(e => {
+                res.status(404)
+                res.json({errorMessage: "There is no entity with such id"})
+            })
+    } else {
+        res.status(400)
+        res.json({errorMessage: "Id is invalid"})
+    }
 }
 
-let deleteDocument = (req, res, documentModel, id) => {
-    return documentModel.findByIdAndDelete(id);
+let deleteDocument = (req, res, documentModel) => {
+    const {id} = req.params
+    if (mongoose.Types.ObjectId.isValid(id)) {
+        documentModel
+            .findByIdAndDelete(id)
+            .then(document => {
+                res.json(document)
+            })
+            .catch(e => {
+                res.status(404)
+                res.json({errorMessage: "There is no entity with such id"})
+            })
+    } else {
+        res.status(400)
+        res.json({errorMessage: "Id is invalid"})
+    }
 }
 
 
