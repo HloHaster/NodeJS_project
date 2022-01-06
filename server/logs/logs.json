@@ -558,5 +558,61 @@
         "params": {},
         "body": {},
         "datetime": "2022-01-06T18:35:57.429Z"
+    },
+    {
+        "rout": "/posts",
+        "typeOfReq": "GET",
+        "params": {},
+        "body": {},
+        "datetime": "2022-01-06T18:41:07.174Z"
+    },
+    {
+        "rout": "/posts/61d450123b40833fea1a373e",
+        "typeOfReq": "GET",
+        "params": {},
+        "body": {},
+        "datetime": "2022-01-06T18:41:09.442Z"
+    },
+    {
+        "rout": "/posts",
+        "typeOfReq": "GET",
+        "params": {},
+        "body": {},
+        "datetime": "2022-01-06T18:43:43.871Z"
+    },
+    {
+        "rout": "/posts",
+        "typeOfReq": "GET",
+        "params": {},
+        "body": {},
+        "datetime": "2022-01-06T18:44:20.633Z"
+    },
+    {
+        "rout": "/posts",
+        "typeOfReq": "GET",
+        "params": {},
+        "body": {},
+        "datetime": "2022-01-06T18:44:35.898Z"
+    },
+    {
+        "rout": "/posts",
+        "typeOfReq": "GET",
+        "params": {},
+        "body": {},
+        "datetime": "2022-01-06T18:45:28.011Z"
+    },
+    {
+        "rout": "/categories",
+        "typeOfReq": "GET",
+        "params": {},
+        "body": {},
+        "datetime": "2022-01-06T18:45:37.954Z"
+    },
+    {
+        "rout": "/posts",
+        "typeOfReq": "GET",
+        "params": {},
+        "body": {},
+        "datetime": "2022-01-06T18:49:19.224Z"
     }
 ]
