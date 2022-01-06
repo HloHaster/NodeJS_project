@@ -1,45 +1,59 @@
+const http = require('http')
 
 module.exports = {
-    find: function (req, res) {
-        genericController.findAllDocuments(req, res, AuthorModel)
-    },
-
-    findOne: function (req, res) {
-        genericController.findOneDocumentById(req, res, AuthorModel)
-    },
-
-    create: function (req, res) {
-        const {name, email} = req.body;
-        if (isStrEmpty(name) || isStrEmpty(email)) {
-            return res.status(400).json({
-                error: "The author's name and email must not be empty"
+    find: async function (req, res) {
+        try {
+            const options = {
+                hostname: 'localhost',
+                port: 3000,
+                path: '/authors',
+                method: 'GET'
+            }
+            const serverRequest = http.request(options, serverResponse => {
+                serverResponse.on('data', d => {
+                    if (serverResponse.statusCode >= 400 && serverResponse.statusCode <= 599) {
+                        let error = JSON.parse(d)
+                        res.render('error', {error: error.errorMessage, title: "Error"})
+                        return
+                    }
+                    let authors = JSON.parse(d)
+                    const haveAuthors = !!authors.length;
+                    res.render('authors', {haveAuthors, authors, title: "Authors"})
+                })
             })
-        }
 
-        if (!isEmailValid(email)) {
-            return res.status(400).json({
-                error: "The author's email is incorrect"
+            serverRequest.end();
+        } catch (e) {
+            res.status(500)
+            res.render('error.hbs', {title: 'error 500', errorMessage: "Unexpected error occurred on the server"})
+        }
+    },
+
+    findOne: async function (req, res) {
+        try {
+            const {id} = req.params;
+            const options = {
+                hostname: 'localhost',
+                port: 3000,
+                path: `/authors/${id}`,
+                method: 'GET'
+            }
+            const serverRequest = http.request(options, serverResponse => {
+                serverResponse.on('data', d => {
+                    if (serverResponse.statusCode >= 400 && serverResponse.statusCode <= 599) {
+                        let error = JSON.parse(d)
+                        res.render('error', {error: error.errorMessage, title: "Error"})
+                        return
+                    }
+                    let author = JSON.parse(d)
+                    const haveAuthor = !!author;
+                    res.render('authorPage', {haveAuthor, author, title: `Author ${id}`})
+                })
             })
+            serverRequest.end();
+        } catch (e) {
+            res.status(500)
+            res.render('error.hbs', {title: 'error 500', errorMessage: "Unexpected error occurred on the server"})
         }
-
-        genericController.saveDocument(req, res, AuthorModel)
-    },
-
-    update: function (req, res) {
-        genericController.updateDocument(req, res, AuthorModel)
-    },
-
-    remove: function (req, res) {
-        genericController.deleteDocument(req, res, AuthorModel)
     }
 }
-
-let isStrEmpty = (str) => {
-    return !str || !str.trim();
-}
-
-function isEmailValid(email) {
-    return emailRegex.test(email);
-}
-
-let emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,8})+$/;

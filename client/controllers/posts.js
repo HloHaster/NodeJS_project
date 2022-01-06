@@ -1,6 +1,5 @@
 const http = require('http')
 
-
 module.exports = {
     find: async function (req, res) {
         try {
@@ -12,21 +11,21 @@ module.exports = {
             }
             const serverRequest = http.request(options, serverResponse => {
                 serverResponse.on('data', d => {
+                    if (serverResponse.statusCode >= 400 && serverResponse.statusCode <= 599) {
+                        let error = JSON.parse(d)
+                        res.render('error', {error: error.errorMessage, title: "Error"})
+                        return
+                    }
                     let posts = JSON.parse(d)
                     const havePosts = !!posts.length;
                     res.render('index', {havePosts, posts, title: "Home"})
                 })
             })
 
-            // serverRequest.on('error', err => {
-            //     // res.render('error.hbs', {title: `error ${serverResponse.statusCode}`, message: `${serverResponse.statusMessage}`})
-            //     console.log(`Got error: ${err.message}`)
-            // })
-
             serverRequest.end();
         } catch (e) {
             res.status(500)
-            res.render('error.hbs', {title: 'error 500', message: "Unexpected error occurred on the server"})
+            res.render('error.hbs', {title: 'error 500', errorMessage: "Unexpected error occurred on the server"})
         }
     },
 
@@ -41,18 +40,20 @@ module.exports = {
             }
             const serverRequest = http.request(options, serverResponse => {
                 serverResponse.on('data', d => {
+                    if (serverResponse.statusCode >= 400 && serverResponse.statusCode <= 599) {
+                        let error = JSON.parse(d)
+                        res.render('error', {error: error.errorMessage, title: "Error"})
+                        return
+                    }
                     let post = JSON.parse(d)
                     const havePost = !!post;
                     res.render('postPage', {havePost, post, title: `Post ${id}`})
                 })
-                // serverResponse.on('error', err => {
-                //     res.render('error.hbs', {title: `error ${serverResponse.statusCode}`, message: `${serverResponse.statusMessage}`})
-                // })
             })
             serverRequest.end();
         } catch (e) {
             res.status(500)
-            res.render('error.hbs', {title: 'error 500', message: "Unexpected error occurred on the server"})
+            res.render('error.hbs', {title: 'error 500', errorMessage: "Unexpected error occurred on the server"})
         }
-    },
+    }
 }

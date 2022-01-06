@@ -7,7 +7,7 @@ module.exports = {
             genericController.findAllDocuments(req, res, PostModel)
         } catch (e) {
             res.status(500)
-            res.render('error.hbs', {title: 'error 500', message: "Unexpected error occurred on the server"})
+            res.json({errorMessage: "Unexpected error occurred on the server"})
         }
     },
 
@@ -17,27 +17,22 @@ module.exports = {
             genericController.findOneDocumentById(req, res, PostModel, id)
         } catch (e) {
             res.status(500)
-            res.render('error.hbs', {title: 'error 500', message: "Unexpected error occurred on the server"})
+            res.json({errorMessage: "Unexpected error occurred on the server"})
         }
-        // catch (e) {
-        //     res.status(404)
-        //     res.render('error.hbs', {title: 'error 404', message: "There is no entity with such id"})
-        // }
     },
 
     create: function (req, res) {
-        try {
-            const {name, body} = req.body;
-            if (isStrEmpty(name) || isStrEmpty(body)) {
-                res.status(400)
-                res.render('error.hbs', {title: 'error 400', message: "The post's name and body must not be empty"})
-                return;
-            }
-            genericController.saveDocument(req, res, PostModel)
-        } catch (e) {
-            res.status(500)
-            res.render('error.hbs', {title: 'error 500', message: "Unexpected error occurred on the server"})
+        const {name, body} = req.body;
+        if (isStrEmpty(name) || isStrEmpty(body)) {
+            res.status(400)
+            res.render('error.hbs', {title: 'error 400', errorMessage: "The post's name and body must not be empty"})
+            return;
         }
+        genericController.saveDocument(req, res, PostModel)
+        // } catch (e) {
+        //     res.status(500)
+        //     res.render('error.hbs', {title: 'error 500', errorMessage: "Unexpected error occurred on the server"})
+        // }
     },
 
     update: async function (req, res) {
@@ -49,7 +44,7 @@ module.exports = {
             res.redirect('/')
         } catch (e) {
             res.status(404)
-            res.render('error.hbs', {title: 'error 404', message: "There is no entity with such id"})
+            res.render('error.hbs', {title: 'error 404', errorMessage: "There is no entity with such id"})
         }
     },
 
@@ -60,7 +55,7 @@ module.exports = {
             res.redirect('/')
         } catch (e) {
             res.status(404)
-            res.render('error.hbs', {title: 'error 404', message: "There is no entity with such id"})
+            res.render('error.hbs', {title: 'error 404', errorMessage: "There is no entity with such id"})
         }
     }
 }

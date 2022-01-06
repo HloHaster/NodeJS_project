@@ -1,17 +1,32 @@
+let mongoose = require('mongoose')
+
 let findAllDocuments = (req, res, documentModel) => {
     documentModel
         .find()
         .then(documents => {
             res.json(documents)
         })
+        .catch(e => {
+            res.status(500)
+            res.json({errorMessage: "Internal Server Error"})
+        })
 }
 
 let findOneDocumentById = (req, res, documentModel, id) => {
-    documentModel
-        .findOne({"_id": id})
-        .then(document => {
-            res.json(document)
-        })
+    if (mongoose.Types.ObjectId.isValid(id)) {
+        documentModel
+            .findOne({"_id": id})
+            .then(document => {
+                res.json(document)
+            })
+            .catch(e => {
+                res.status(404)
+                res.json({ errorMessage: "There is no entity with such id"})
+            })
+    } else {
+        res.status(400)
+        res.json({errorMessage: "Id is invalid"})
+    }
 }
 
 let saveDocument = (req, res, documentModel) => {
@@ -22,9 +37,11 @@ let saveDocument = (req, res, documentModel) => {
     let document = new documentModel(doc)
 
     document.save()
-        .then ( document => {
+        .then(document => {
             res.json(document)
-        })
+        }).catch(e => {
+
+    })
 }
 
 let updateDocument = async (req, res, documentModel, document, id) => {
