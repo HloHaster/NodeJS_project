@@ -13,17 +13,10 @@ module.exports = {
     create: function (req, res) {
         const {name, email} = req.body;
         if (isStrEmpty(name) || isStrEmpty(email)) {
-            return res.status(400).json({
-                error: "The author's name and email must not be empty"
-            })
+            res.status(400)
+            res.json({errorMessage: "The post's name and body must not be empty"})
+            return;
         }
-
-        if (!isEmailValid(email)) {
-            return res.status(400).json({
-                error: "The author's email is incorrect"
-            })
-        }
-
         genericController.saveDocument(req, res, AuthorModel)
     },
 
@@ -39,9 +32,3 @@ module.exports = {
 let isStrEmpty = (str) => {
     return !str || !str.trim();
 }
-
-function isEmailValid(email) {
-    return emailRegex.test(email);
-}
-
-let emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,8})+$/;

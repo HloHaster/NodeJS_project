@@ -13,11 +13,10 @@ module.exports = {
     create: function (req, res) {
         const {name} = req.body;
         if (isStrEmpty(name)) {
-            return res.status(400).json({
-                error: "The category's name must not be empty"
-            })
+            res.status(400)
+            res.json({errorMessage: "The post's name and body must not be empty"})
+            return;
         }
-
         genericController.saveDocument(req, res, CategoryModel)
     },
 
