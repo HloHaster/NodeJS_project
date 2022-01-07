@@ -1,4 +1,9 @@
-<h1>TAG  {{tag.name}}</h1>
+<h1>TAG</h1>
 
-<p>Created: {{tag.createdAt}}</p>
-<p>Updated: {{tag.updatedAt}}</p>
+{{#if haveTag}}
+    <p>Name: {{tag.name}}</p>
+    <p>Created: {{tag.createdAt}}</p>
+    <p>Updated: {{tag.updatedAt}}</p>
+{{else}}
+    <div>Nothing Found</div>
+{{/if}}
