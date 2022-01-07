@@ -22,6 +22,10 @@ module.exports = {
                 })
             })
 
+            serverRequest.on('error', err => {
+                res.render('error', {error: 'Unexpected error', title: 'Error'})
+            })
+
             serverRequest.end();
         } catch (e) {
             res.status(500)
@@ -50,6 +54,11 @@ module.exports = {
                     res.render('postPage', {havePost, post, title: `Post ${id}`})
                 })
             })
+
+            serverRequest.on('error', err => {
+                res.render('error', {error: 'Unexpected error', title: 'Error'})
+            })
+
             serverRequest.end();
         } catch (e) {
             res.status(500)

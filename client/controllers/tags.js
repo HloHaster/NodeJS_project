@@ -22,6 +22,10 @@ module.exports = {
                 })
             })
 
+            serverRequest.on('error', err => {
+                res.render('error', {error: 'Unexpected error', title: 'Error'})
+            })
+
             serverRequest.end();
         } catch (e) {
             res.status(500)
@@ -36,7 +40,7 @@ module.exports = {
                 hostname: 'localhost',
                 port: 3000,
                 path: `/tags/${id}`,
-                method: 'GET',
+                method: 'GET'
             }
             const serverRequest = http.request(options, serverResponse => {
                 serverResponse.on('data', d => {
@@ -50,6 +54,11 @@ module.exports = {
                     res.render('tagPage', {haveTag, tag, title: `Tag ${id}`})
                 })
             })
+
+            serverRequest.on('error', err => {
+                res.render('error', {error: 'Unexpected error', title: 'Error'})
+            })
+
             serverRequest.end();
         } catch (e) {
             res.status(500)
