@@ -2,22 +2,28 @@
 
 {{#if havePost}}
     <div class="card" style="padding-top: 10px">
-        {{#if post.thumbnail}}
-            <img style="width: 40%; height: 300px; object-fit: contain; margin-bottom: 10px" src="{{post.thumbnail}}"
-                 alt="thumbnail">
-        {{/if}}
-        <div style="padding-left: 35px">
-        <p style="font-weight: bold;">{{post.name}}</a></p>
-        <p>Body: {{post.body}}</p>
-        {{#if post.excerpt}}
-            <p>Excerpt: {{post.excerpt}}</p>
-        {{/if}}
-        <p>Categories: {{#each post.categories}} {{this}} {{/each}} </p>
-        <p>Authors: {{#each post.authors}} {{this}} {{/each}}</p>
-        <p>Tags: {{#each post.tags}} {{this}} {{/each}}</p>
-        <p>Created: {{post.createdAt}}</p>
-        <p>Updated: {{post.updatedAt}}</p>
+        <div class="card_post-information">
+            {{#if post.thumbnail}}
+                <img style="width: 40%; margin-bottom: 20px"
+                     src="{{post.thumbnail}}"
+                     alt="thumbnail">
+            {{/if}}
+            <div class="post-information_data">
+            <p class="data_name">{{post.name}}</a></p>
+            <p>Categories: {{#each post.categories}} {{this}} {{/each}} </p>
+            <p>Authors: {{#each post.authors}} {{this}} {{/each}}</p>
+            <p>Tags: {{#each post.tags}} {{this}} {{/each}}</p>
+            <p>Created: {{post.createdAt}}</p>
+            <p>Updated: {{post.updatedAt}}</p>
+            </div>
         </div>
+        <div style="padding-left: 35px">
+            {{#if post.excerpt}}
+                <p>Excerpt: "{{post.excerpt}}..."</p>
+            {{/if}}
+            <p>Body: {{post.body}}</p>
+        </div>
+        <a href="/" class="btn btn-primary">Go back to the main page</a>
     </div>
 {{else}}
     <div>Nothing Found</div>
