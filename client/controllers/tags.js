@@ -55,7 +55,7 @@ module.exports = {
                     }
                     let tag = JSON.parse(d)
                     const haveTag = !!tag;
-                    res.render('tagPage', {haveTag, tag, title: `Tag ${id}`})
+                    res.render('modelpages/tagPage', {haveTag, tag, title: `Tag ${id}`})
                 })
             })
 

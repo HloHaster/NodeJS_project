@@ -54,7 +54,7 @@ module.exports = {
                     }
                     let author = JSON.parse(d)
                     const haveAuthor = !!author;
-                    res.render('authorPage', {haveAuthor, author, title: `Author ${id}`})
+                    res.render('modelpages/authorPage', {haveAuthor, author, title: `Author ${id}`})
                 })
             })
 

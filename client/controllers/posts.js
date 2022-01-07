@@ -54,7 +54,7 @@ module.exports = {
                     }
                     let post = JSON.parse(d)
                     const havePost = !!post;
-                    res.render('postPage', {havePost, post, title: `Post ${id}`})
+                    res.render('modelpages/postPage', {havePost, post, title: `Post ${id}`})
                 })
             })
 

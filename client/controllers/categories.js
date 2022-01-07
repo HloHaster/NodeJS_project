@@ -54,7 +54,7 @@ module.exports = {
                     }
                     let category = JSON.parse(d)
                     const haveCategory = !!category;
-                    res.render('categoryPage', {haveCategory, category, title: `category ${id}`})
+                    res.render('modelpages/categoryPage', {haveCategory, category, title: `category ${id}`})
                 })
             })
 
