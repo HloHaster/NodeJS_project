@@ -1,0 +1,9 @@
+.card-text span{
+    font-weight: bold;
+}
+
+.card-time {
+    display: flex;
+    justify-content: space-between;
+    color: darkgray;
+}

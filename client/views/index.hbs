@@ -11,10 +11,16 @@
                     {{/if}}
                     <h5 class="card-title" style="font-weight: bold;">{{name}}</h5>
                     <p class="card-text">{{body}}</p>
-                    <p class="card-text">"{{excerpt}}..."</p>
-                    <p class="card-text"><b>Categories:</b> {{categories}}</p>
-                    <p class="card-text"><b>Authors:</b> {{authors}}</p>
-                    <p class="card-text"><b>Tags:</b> {{tags}}</p>
+                    {{#if excerpt}}
+                        <p>Excerpt: "{{excerpt}}..."</p>
+                    {{/if}}
+                    <p class="card-text"><span>Categories:</span> {{#each categories}} {{this}} {{/each}}</p>
+                    <p class="card-text"><span>Authors:</span> {{#each authors}} {{this}} {{/each}}</p>
+                    <p class="card-text"><span>Tags:</span> {{#each tags}} {{this}} {{/each}}</p>
+                    <div class="card-time">
+                        <p>Created: {{createdAt}}</p>
+                        <p>Updated: {{updatedAt}}</p>
+                    </div>
                     <a href="/posts/{{_id}}" class="btn btn-primary">READ MORE</a>
                 </div>
             </div>
