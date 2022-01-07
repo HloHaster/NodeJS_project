@@ -14,7 +14,7 @@ module.exports = {
         const {name, email} = req.body;
         if (isStrEmpty(name) || isStrEmpty(email)) {
             res.status(400)
-            res.json({errorMessage: "The post's name and body must not be empty"})
+            res.json({errorMessage: "The author's name and email must not be empty"})
             return;
         }
         genericController.saveDocument(req, res, AuthorModel)

@@ -14,7 +14,7 @@ module.exports = {
         const {name} = req.body;
         if (isStrEmpty(name)) {
             res.status(400)
-            res.json({errorMessage: "The post's name and body must not be empty"})
+            res.json({errorMessage: "The tag name must not be empty"})
             return;
         }
         genericController.saveDocument(req, res, TagModel)
