@@ -3,11 +3,11 @@ const genericController = require('./genericController')
 
 module.exports = {
     find: function (req, res) {
-        genericController.findAllDocuments(req, res, TagModel)
+        genericController.findAllDocumentsAndSendResponse(req, res, TagModel)
     },
 
     findOne: function (req, res) {
-        genericController.findOneDocumentById(req, res, TagModel)
+        genericController.findOneDocumentByIdAndSendResponse(req, res, TagModel)
     },
 
     create: function (req, res) {
@@ -17,15 +17,15 @@ module.exports = {
             res.json({errorMessage: "The tag name must not be empty"})
             return;
         }
-        genericController.saveDocument(req, res, TagModel)
+        genericController.saveDocumentAndSendResponse(req, res, TagModel)
     },
 
     update: function (req, res) {
-        genericController.updateDocument(req, res, TagModel)
+        genericController.updateDocumentAndSendResponse(req, res, TagModel)
     },
 
     remove: function (req, res) {
-        genericController.deleteDocument(req, res, TagModel)
+        genericController.deleteDocumentAndSendResponse(req, res, TagModel)
     }
 }
 

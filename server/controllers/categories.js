@@ -3,11 +3,11 @@ const genericController = require('./genericController')
 
 module.exports = {
     find: function (req, res) {
-        genericController.findAllDocuments(req, res, CategoryModel)
+        genericController.findAllDocumentsAndSendResponse(req, res, CategoryModel)
     },
 
     findOne: function (req, res) {
-        genericController.findOneDocumentById(req, res, CategoryModel)
+        genericController.findOneDocumentByIdAndSendResponse(req, res, CategoryModel)
     },
 
     create: function (req, res) {
@@ -17,15 +17,15 @@ module.exports = {
             res.json({errorMessage: "The category name must not be empty"})
             return;
         }
-        genericController.saveDocument(req, res, CategoryModel)
+        genericController.saveDocumentAndSendResponse(req, res, CategoryModel)
     },
 
     update: function (req, res) {
-        genericController.updateDocument(req, res, CategoryModel)
+        genericController.updateDocumentAndSendResponse(req, res, CategoryModel)
     },
 
     remove: function (req, res) {
-        genericController.deleteDocument(req, res, CategoryModel)
+        genericController.deleteDocumentAndSendResponse(req, res, CategoryModel)
     }
 }
 

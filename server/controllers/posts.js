@@ -3,11 +3,11 @@ const genericController = require('./genericController')
 
 module.exports = {
     find: function (req, res) {
-        genericController.findAllDocuments(req, res, PostModel)
+        genericController.findAllDocumentsAndSendResponse(req, res, PostModel)
     },
 
     findOne: function (req, res) {
-        genericController.findOneDocumentById(req, res, PostModel)
+        genericController.findOneDocumentByIdAndSendResponse(req, res, PostModel)
     },
 
     create: function (req, res) {
@@ -17,15 +17,15 @@ module.exports = {
             res.json({errorMessage: "The post's name and body must not be empty"})
             return;
         }
-        genericController.saveDocument(req, res, PostModel)
+        genericController.saveDocumentAndSendResponse(req, res, PostModel)
     },
 
     update: function (req, res) {
-        genericController.updateDocument(req, res, PostModel)
+        genericController.updateDocumentAndSendResponse(req, res, PostModel)
     },
 
     remove: function (req, res) {
-        genericController.deleteDocument(req, res, PostModel)
+        genericController.deleteDocumentAndSendResponse(req, res, PostModel)
     }
 }
 

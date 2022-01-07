@@ -1,6 +1,6 @@
 let mongoose = require('mongoose')
 
-let findAllDocuments = (req, res, documentModel) => {
+let findAllDocumentsAndSendResponse = (req, res, documentModel) => {
     documentModel
         .find()
         .then(documents => {
@@ -12,7 +12,7 @@ let findAllDocuments = (req, res, documentModel) => {
         })
 }
 
-let findOneDocumentById = (req, res, documentModel) => {
+let findOneDocumentByIdAndSendResponse = (req, res, documentModel) => {
     const {id} = req.params;
     if (mongoose.Types.ObjectId.isValid(id)) {
         documentModel
@@ -30,7 +30,7 @@ let findOneDocumentById = (req, res, documentModel) => {
     }
 }
 
-let saveDocument = (req, res, documentModel) => {
+let saveDocumentAndSendResponse = (req, res, documentModel) => {
     const doc = req.body
 
     delete doc.createdAt
@@ -47,7 +47,7 @@ let saveDocument = (req, res, documentModel) => {
         })
 }
 
-let updateDocument = (req, res, documentModel) => {
+let updateDocumentAndSendResponse = (req, res, documentModel) => {
     const document = req.body
     const {id} = req.params;
 
@@ -70,7 +70,7 @@ let updateDocument = (req, res, documentModel) => {
     }
 }
 
-let deleteDocument = (req, res, documentModel) => {
+let deleteDocumentAndSendResponse = (req, res, documentModel) => {
     const {id} = req.params
     if (mongoose.Types.ObjectId.isValid(id)) {
         documentModel
@@ -89,9 +89,9 @@ let deleteDocument = (req, res, documentModel) => {
 }
 
 
-module.exports.findAllDocuments = findAllDocuments;
-module.exports.findOneDocumentById = findOneDocumentById;
-module.exports.saveDocument = saveDocument;
-module.exports.updateDocument = updateDocument;
-module.exports.deleteDocument = deleteDocument;
+module.exports.findAllDocumentsAndSendResponse = findAllDocumentsAndSendResponse;
+module.exports.findOneDocumentByIdAndSendResponse = findOneDocumentByIdAndSendResponse;
+module.exports.saveDocumentAndSendResponse = saveDocumentAndSendResponse;
+module.exports.updateDocumentAndSendResponse = updateDocumentAndSendResponse;
+module.exports.deleteDocumentAndSendResponse = deleteDocumentAndSendResponse;
 
