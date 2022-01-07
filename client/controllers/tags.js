@@ -1,11 +1,15 @@
 const http = require('http')
 
+const HOSTNAME = 'localhost'
+const PORT = 3000
+
+
 module.exports = {
     find: async function (req, res) {
         try {
             const options = {
-                hostname: 'localhost',
-                port: 3000,
+                hostname: HOSTNAME,
+                port: PORT,
                 path: '/tags',
                 method: 'GET'
             }
@@ -37,8 +41,8 @@ module.exports = {
         try {
             const {id} = req.params;
             const options = {
-                hostname: 'localhost',
-                port: 3000,
+                hostname: HOSTNAME,
+                port: PORT,
                 path: `/tags/${id}`,
                 method: 'GET'
             }

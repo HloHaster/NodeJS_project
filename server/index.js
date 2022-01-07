@@ -3,6 +3,8 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const fileLogger = require('./utils/fileLogger')
 
+const PORT = 3000
+
 const postsRoutes = require('./routes/posts')
 const categoriesRoutes = require('./routes/categories')
 const authorsRoutes = require('./routes/authors')
@@ -41,7 +43,7 @@ mongoose.connect(url, (error) => {
     }
 
     console.log('It is connected')
-    app.listen(3000, () => {
+    app.listen(PORT, () => {
         console.log('Server has been started')
     })
 })
